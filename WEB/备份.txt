@@ -1,0 +1,46 @@
+web源码备份
+手动拖备份
+scp -r Web1:/var/www/html/ webbak/
+备份最好时间备份,每隔一个小时备份,注意保留好原始备份
+#!/bin/bash
+time = /bin/date + %F`
+bak_file = "/data/backup/$time.tar.gz"
+webdir = "/data/www/"
+tar zcvf $bak_file $webdir > /dev/bull 2 >&1 &
+crontab 30 * * * * /bin/bash /data/bak.sh    #定时执行
+###数据库备份
+mysqldump -uroot -p --single-transaction --all-databases > backup.sql #所有
+mysqldump -uroot -p --single-transaction dataname > dataname.sql #单个
+mysqldump --skip-lock-tables -uxxx -pxxxxxx -h 166.111.9.173 -R 数据库名 > ./urlevent20180319.sql
+mysqldump -h127.0.0.1 -uroot -ppassword database|gzip > $backupDir/$database-$today.sql.gz`然后,scp回来
+###备份目录
+backDir = /home/backup/database
+#mysqldump 
+mysqldump = /usr/local/mariadb/bin/mysqldump
+host = 127.0.0.1
+username = root
+password = 42342342
+today = `date + %Y%m%d`
+#要备份的数据库数组
+databases = (blog cheinese_medicine)
+#echo $databaseCount
+for database in ${databases[@]}
+	do 
+	echo '开始备份'$database	
+	$mysqldump -h$host -u$username -p$password $database | gzip > $backupDir/$database-$today.sql.gz
+	echo '成功备份'$database'到'$backupDir/$database-$today.sql.gz
+	done
+
+#数据库备份
+##禁止数据库远程连接
+use mysql;
+updata user set host='localhost' where user='root';
+flush privileges;
+#恢复数据库
+mysql -uroot -pTEST < bak.sql
+#取消密码验证
+修改my.cnf,添加skop-grant-tavles
+#修改mysql密码(最好修改mysql,再修改php,一般不存在修改MySQL密码的情况)
+update mysql.user set password = PASSWORD('skyboy') where user=root and host='loaclhost';
+flush privileges;
+

